@@ -1,5 +1,7 @@
 import { Decklist, CardStorage } from "./";
 
+type Position = "top" | "bottom";
+
 export interface PseudoCard {
 	name?: string;
 	copies?: number;
@@ -142,7 +144,7 @@ export class Card {
 	 * @returns The updated Card
 	 * @public
 	 */
-	moveTo(destination: CardStorage): Card {
+	moveTo(destination: CardStorage, position: Position = "bottom"): Card {
 		const origin = this.location;
 
 		if (typeof this.onMoveStart === "function") {
@@ -152,7 +154,7 @@ export class Card {
 		this.#location = undefined; // This *must* be temporary.
 		origin.removeCards(this);
 
-		destination.addCards(this);
+		destination.addCards(position, this);
 		this.#location = destination;
 
 		if (typeof this.onMoveEnd === "function") {
