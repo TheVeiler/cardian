@@ -1,4 +1,4 @@
-import { Card } from "./";
+import { Card } from ".";
 
 type Position = "top" | "bottom";
 
@@ -30,7 +30,7 @@ export class CardStorage {
 	 * @returns The CardStorage instance, or undefined if name didn't match
 	 * @public
 	 */
-	static getByName(name: string): CardStorage {
+	static getByName(name: string): CardStorage | undefined {
 		return CardStorage.#list.find((storage) => storage.name === name);
 	}
 

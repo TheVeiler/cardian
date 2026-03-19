@@ -1,1 +1,1 @@
-export * as decklists from "./decklists/";
+export * as decklists from "./decklists/index";

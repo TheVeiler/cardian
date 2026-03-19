@@ -1,10 +1,23 @@
-import type { PseudoCard } from "lib";
+import type { PseudoCard } from "../../../lib/index";
 
-const rootDirectory = import.meta.url.split("node_modules/cardian/")[0];
-const assetsDirectory = `${rootDirectory}public/plugins/decklists/standard52/`;
+const assetsDirectory = `file://${__dirname}/assets/standard52/`;
 
-const ranks = new Set(["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"]);
-const suits = new Set(["♦", "♠", "♥", "♣"]);
+const ranks: Set<CardValue> = new Set([
+	"A",
+	"K",
+	"Q",
+	"J",
+	"10",
+	"9",
+	"8",
+	"7",
+	"6",
+	"5",
+	"4",
+	"3",
+	"2",
+]);
+const suits: Set<CardSuit> = new Set(["♦", "♠", "♥", "♣"]);
 
 const suitInitials = {
 	"♦": "d",
