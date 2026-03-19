@@ -124,12 +124,12 @@ export class Card {
 		this.#onMoveEnd = undefined;
 	}
 
-	constructor(deckList: Decklist, pseudoCard: PseudoCard) {
+	constructor(decklist: Decklist, pseudoCard: PseudoCard) {
 		this.#name = pseudoCard.name;
 
-		this.#decklist = deckList;
-		deckList.defaultStorage.addCards(this);
-		this.#location = deckList.defaultStorage;
+		this.#decklist = decklist;
+		decklist.defaultStorage.addCards(this);
+		this.#location = decklist.defaultStorage;
 
 		this.#images.front = pseudoCard.assets?.front ?? "";
 		this.#images.back = pseudoCard.assets?.back ?? "";

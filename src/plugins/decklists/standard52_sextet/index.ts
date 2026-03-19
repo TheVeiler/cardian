@@ -1,4 +1,4 @@
-import { PseudoCard } from "lib";
+import type { PseudoCard } from "lib";
 
 const rootDirectory = import.meta.url.split("node_modules/cardian/")[0];
 const assetsDirectory = `${rootDirectory}public/plugins/decklists/standard52/`;
