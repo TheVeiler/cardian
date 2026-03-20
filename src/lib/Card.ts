@@ -151,7 +151,7 @@ export class Card {
 			this.onMoveStart(origin, destination);
 		}
 
-		//this.#location = undefined; // This *must* be temporary.
+		this.#location = undefined; // This *must* be temporary.
 		origin.removeCards(this);
 
 		destination.addCards(position, this);

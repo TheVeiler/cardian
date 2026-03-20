@@ -1,4 +1,4 @@
-const Cardian = require("./dist/index.js");
+const Cardian = require("cardian");
 
 const cardlist = new Cardian.Decklist(Cardian.plugins.decklists.standard52);
 const deck = cardlist.defaultStorage;

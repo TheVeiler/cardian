@@ -28,8 +28,8 @@ export class Decklist extends Array<Card> {
 		super();
 
 		this.#defaultStorage = new CardStorage("deck");
-		
-        this.add(...pseudoCards);
+
+		this.add(...pseudoCards);
 	}
 
 	/**

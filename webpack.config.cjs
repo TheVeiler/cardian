@@ -3,13 +3,11 @@
 const path = require("node:path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV === "production";
-
 /** @type {import("webpack").Configuration} */
 const config = {
 	entry: "./src/index.ts",
 
-	devtool: "inline-source-map",
+	//devtool: "inline-source-map",
 
 	experiments: {
 		outputModule: true, // this needs to be added to build a library target as ESM
@@ -51,7 +49,7 @@ const config = {
 };
 
 module.exports = () => {
-	config.mode = isProduction ? "production" : "development";
+	config.mode = process.env.NODE_ENV === "production" ? "production" : "development";
 
 	config.node = {
 		__filename: "eval-only",

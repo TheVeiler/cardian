@@ -1,4 +1,4 @@
-import * as Cardian from "./dist/index.js";
+import * as Cardian from "cardian";
 
 const cardlist = new Cardian.Decklist(Cardian.plugins.decklists.standard52);
 const deck = cardlist.defaultStorage;
