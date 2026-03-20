@@ -1,4 +1,6 @@
-import { Decklist, CardStorage } from "./";
+import { Decklist, CardStorage } from ".";
+
+type Position = "top" | "bottom";
 
 type Position = "top" | "bottom";
 
@@ -33,7 +35,7 @@ export class Card {
 	 * @returns The Card or undefined if ID didn't match
 	 * @public
 	 */
-	static getById(id: number): Card {
+	static getById(id: number): Card | undefined {
 		return Card.#list.find((card) => card.id === id);
 	}
 
@@ -73,7 +75,7 @@ export class Card {
 	 */
 	#decklist: Decklist;
 
-	#location: CardStorage | undefined;
+	#location: CardStorage;
 	/**
 	 * The current location of a Card.
 	 * @type {CardStorage}
@@ -83,7 +85,7 @@ export class Card {
 		return this.#location;
 	}
 
-	#images = {
+	#images: { back?: URL; front?: URL } = {
 		back: undefined,
 		front: undefined,
 	};
@@ -96,11 +98,11 @@ export class Card {
 		return this.#images;
 	}
 
-	#onMoveStart = undefined;
+	#onMoveStart?: (origin?: CardStorage, destination?: CardStorage) => void = undefined;
 	get onMoveStart() {
 		return this.#onMoveStart;
 	}
-	set onMoveStart(callback: (origin?: CardStorage, destination?: CardStorage) => void) {
+	set onMoveStart(callback) {
 		if (["function", "undefined"].includes(typeof callback)) {
 			this.#onMoveStart = callback;
 			return;
@@ -111,11 +113,11 @@ export class Card {
 			`Card.onMoveStart must be a function or undefined. Received: ${typeof callback}`,
 		);
 	}
-	#onMoveEnd = undefined;
+	#onMoveEnd?: (origin?: CardStorage, destination?: CardStorage) => void = undefined;
 	get onMoveEnd() {
 		return this.#onMoveEnd;
 	}
-	set onMoveEnd(callback: (origin?: CardStorage, destination?: CardStorage) => void) {
+	set onMoveEnd(callback) {
 		if (["function", "undefined"].includes(typeof callback)) {
 			this.#onMoveEnd = callback;
 			return;
@@ -124,15 +126,15 @@ export class Card {
 		this.#onMoveEnd = undefined;
 	}
 
-	constructor(deckList: Decklist, pseudoCard: PseudoCard) {
-		this.#name = pseudoCard.name;
+	constructor(decklist: Decklist, pseudoCard: PseudoCard) {
+		this.#name = pseudoCard.name || "";
 
-		this.#decklist = deckList;
-		deckList.defaultStorage.addCards(this);
-		this.#location = deckList.defaultStorage;
+		this.#decklist = decklist;
+		decklist.defaultStorage.addCards(this);
+		this.#location = decklist.defaultStorage;
 
-		this.#images.front = pseudoCard.assets?.front ?? "";
-		this.#images.back = pseudoCard.assets?.back ?? "";
+		this.#images.front = pseudoCard.assets?.front;
+		this.#images.back = pseudoCard.assets?.back;
 
 		this.#id = Card.#lastUsedId++;
 		Card.#add(this);

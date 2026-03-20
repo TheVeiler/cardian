@@ -1,26 +1,17 @@
 {
-	"include": ["src/*"],
-
 	"compilerOptions": {
-		"outDir": "./dist",
-		"moduleDetection": "force",
-		"module": "Preserve",
-		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": true,
+		"module": "esnext",
+		"target": "es2022",
+		"moduleResolution": "node",
 		"allowJs": true,
-		"esModuleInterop": true,
-		"isolatedModules": true,
-		"target": "es2024",
-		"baseUrl": "./",
 		"declaration": true,
 		"declarationMap": true,
-
-		"paths": {
-			"lib": ["./src/lib/index.js"],
-			"lib/*": ["./src/lib/*"],
-			"plugins": ["./src/plugins/index.js"],
-			"plugins/*": ["./src/plugins/*"],
-			"public": ["./public/index.js"],
-			"public/*": ["./public/*"]
-		}
-	}
+		"sourceMap": true,
+		"baseUrl": ".",
+		"outDir": "dist",
+		"types": ["node", "webpack/module"]
+	},
+	"files": ["src/index.ts"]
 }
