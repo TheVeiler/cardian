@@ -1,5 +1,5 @@
-import { Card, CardStorage, Decklist } from "lib";
-import * as plugins from "plugins";
+export * as common from "./common/index";
+export * as decklists from "./decklists/index";
 
-export { Card, CardStorage, Decklist, plugins };
-export default { Card, CardStorage, Decklist, plugins };
+export { Card, Box, List } from "./common/index";
+export { standard52, standard52_sextet } from "./decklists/index";

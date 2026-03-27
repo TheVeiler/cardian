@@ -1,4 +1,4 @@
-import { Decklist, CardStorage } from "./";
+import { List, Box } from "./index";
 
 type Position = "top" | "bottom";
 
@@ -14,7 +14,7 @@ export interface PseudoCard {
 /**
  * The core element of this library. It represents a real world card.
  * @constructor
- * @param {Decklist} decklist - The Decklist the Card is part of
+ * @param {List} List - The List the Card is part of
  * @param {PseudoCard} pseudoCard - The blueprint of the Card
  */
 export class Card {
@@ -33,7 +33,7 @@ export class Card {
 	 * @returns The Card or undefined if ID didn't match
 	 * @public
 	 */
-	static getById(id: number): Card {
+	static getById(id: number): Card | undefined {
 		return Card.#list.find((card) => card.id === id);
 	}
 
@@ -67,23 +67,23 @@ export class Card {
 	}
 
 	/**
-	 * The Decklist a Card comes from.
-	 * @type {Decklist}
+	 * The List a Card comes from.
+	 * @type {List}
 	 * @private
 	 */
-	#decklist: Decklist;
+	#List: List;
 
-	#location: CardStorage | undefined;
+	#location: Box;
 	/**
 	 * The current location of a Card.
-	 * @type {CardStorage}
+	 * @type {Box}
 	 * @readonly
 	 */
 	get location() {
 		return this.#location;
 	}
 
-	#images = {
+	#images: { back?: URL; front?: URL } = {
 		back: undefined,
 		front: undefined,
 	};
@@ -96,11 +96,11 @@ export class Card {
 		return this.#images;
 	}
 
-	#onMoveStart = undefined;
+	#onMoveStart?: (origin?: Box, destination?: Box) => void = undefined;
 	get onMoveStart() {
 		return this.#onMoveStart;
 	}
-	set onMoveStart(callback: (origin?: CardStorage, destination?: CardStorage) => void) {
+	set onMoveStart(callback) {
 		if (["function", "undefined"].includes(typeof callback)) {
 			this.#onMoveStart = callback;
 			return;
@@ -111,11 +111,11 @@ export class Card {
 			`Card.onMoveStart must be a function or undefined. Received: ${typeof callback}`,
 		);
 	}
-	#onMoveEnd = undefined;
+	#onMoveEnd?: (origin?: Box, destination?: Box) => void = undefined;
 	get onMoveEnd() {
 		return this.#onMoveEnd;
 	}
-	set onMoveEnd(callback: (origin?: CardStorage, destination?: CardStorage) => void) {
+	set onMoveEnd(callback) {
 		if (["function", "undefined"].includes(typeof callback)) {
 			this.#onMoveEnd = callback;
 			return;
@@ -124,27 +124,27 @@ export class Card {
 		this.#onMoveEnd = undefined;
 	}
 
-	constructor(decklist: Decklist, pseudoCard: PseudoCard) {
-		this.#name = pseudoCard.name;
+	constructor(List: List, pseudoCard: PseudoCard) {
+		this.#name = pseudoCard.name || "";
 
-		this.#decklist = decklist;
-		decklist.defaultStorage.addCards(this);
-		this.#location = decklist.defaultStorage;
+		this.#List = List;
+		List.mainBox.addCards(this);
+		this.#location = List.mainBox;
 
-		this.#images.front = pseudoCard.assets?.front ?? "";
-		this.#images.back = pseudoCard.assets?.back ?? "";
+		this.#images.front = pseudoCard.assets?.front;
+		this.#images.back = pseudoCard.assets?.back;
 
 		this.#id = Card.#lastUsedId++;
 		Card.#add(this);
 	}
 
 	/**
-	 * Moves a Card to the given CardStorage.
-	 * @param {CardStorage} destination - The CardStorage the Card moves to
+	 * Moves a Card to the given Box.
+	 * @param {Box} destination - The Box the Card moves to
 	 * @returns The updated Card
 	 * @public
 	 */
-	moveTo(destination: CardStorage, position: Position = "bottom"): Card {
+	moveTo(destination: Box, position: Position = "bottom"): Card {
 		const origin = this.location;
 
 		if (typeof this.onMoveStart === "function") {
@@ -165,7 +165,7 @@ export class Card {
 	}
 
 	/**
-	 * Returns a Card to its default CardStorage.
+	 * Returns a Card to its default Box.
 	 * @returns The updated Card
 	 * @public
 	 */
@@ -176,7 +176,7 @@ export class Card {
 		this.onMoveStart = undefined;
 		this.onMoveEnd = undefined;
 
-		this.moveTo(this.#decklist.defaultStorage);
+		this.moveTo(this.#List.mainBox);
 
 		this.onMoveStart = _onMoveStart;
 		this.onMoveEnd = _onMoveEnd;

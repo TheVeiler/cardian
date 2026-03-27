@@ -1,8 +1,10 @@
 # Cardian
 
+![preview](./preview.png)
+
 ## Description
 
-**Cardian** is an utility library to help you making apps using cards.
+**Cardian** is a utility library whose purpose is to make creating apps using cards easier.
 
 The library gives you access to the following exported classes, and all of them are also included in the default export.
 
@@ -10,13 +12,54 @@ The library gives you access to the following exported classes, and all of them 
 
 Once the package downloaded, you could start by loading the standard52 plugin and play with that:
 
-```js
-import { Decklist, plugins } from "cardian";
+### as a client-side script
 
-const cardlist = new Decklist(plugins.decklists.standard52);
+```html
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script type="module">
+            import Cardian from "https://theveiler.github.io/Cardian/index.js";
+
+            const cardlist = new Cardian.Decklist(Cardian.plugins.decklists.standard52);
+            const deck = cardlist.defaultStorage;
+
+            console.log(deck.top);
+        </script>
+    </head>
+    <body></body>
+</html>
+```
+
+### as a NPM package
+
+#### CommonJS
+
+```js
+const Cardian = require("cardian");
+
+const cardlist = new Cardian.Decklist(Cardian.plugins.decklists.standard52);
 const deck = cardlist.defaultStorage;
 
-console.log(deck.top.name); // should display a king
+console.log(deck.top.name); // should display A♦
+
+deck.shuffle();
+
+console.log(deck.top.name); // should display a random card
+```
+
+#### ECMAScript
+
+```js
+import * as Cardian from "cardian";
+
+const cardlist = new Cardian.Decklist(Cardian.plugins.decklists.standard52);
+const deck = cardlist.defaultStorage;
+
+console.log(deck.top.name); // should display A♦
 
 deck.shuffle();
 
@@ -26,6 +69,9 @@ console.log(deck.top.name); // should display a random card
 ## To-do
 
 - Make a proper documentation (using jsdoc or tsdoc maybe?)
-- Add listener for events when Card moved or when CardStorage changed
+- Add listener for events when CardStorage changed
 - Add unit tests
-- Add support of cjs/import/require
+
+## Credits
+
+Images used for Cardian are made by David Bellot, and only slightly edited afterhand by TheVeiler. All credit must go to the original artist alone. [See more](./public/assets/standard52/README.md)

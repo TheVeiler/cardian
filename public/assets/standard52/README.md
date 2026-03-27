@@ -12,8 +12,9 @@ From Playing Cards From Playing Cards From Playing Cards
 
 ## Back covers
 
-[Source](https://commons.wikimedia.org/wiki/File:Card_back_02.svg)
-[Source](https://commons.wikimedia.org/wiki/File:Card_back_02a.svg)
+[Source 1](https://commons.wikimedia.org/wiki/File:Card_back_02.svg)
+
+[Source 2](https://commons.wikimedia.org/wiki/File:Card_back_02a.svg)
 
 Playing card in SVG based on the French representation. This card has been made with GNOME games in mind and has been successfully tested with Nautilus, Eye of Gnome (both use librsvg), and Inkscape.
 
