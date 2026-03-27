@@ -1,4 +1,4 @@
-import { List, Box } from ".";
+import { List, Box } from "./index";
 
 type Position = "top" | "bottom";
 

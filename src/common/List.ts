@@ -1,4 +1,4 @@
-import { Box, type PseudoCard, Card } from ".";
+import { Box, Card, type PseudoCard } from "./index";
 
 /**
  * A List is a complete collection of Cards.

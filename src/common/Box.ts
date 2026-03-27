@@ -1,4 +1,4 @@
-import { Card } from ".";
+import { Card } from "./index";
 
 type Position = "top" | "bottom";
 
@@ -31,16 +31,16 @@ export class Box {
 	 * @public
 	 */
 	static getByName(name: string): Box | undefined {
-		return Box.#list.find((storage) => storage.name === name);
+		return Box.#list.find((box) => box.name === name);
 	}
 
 	/**
 	 * Adds a new Box to the list of existing ones.
-	 * @param {Box} storage - The Box to add
+	 * @param {Box} box - The Box to add
 	 * @private
 	 */
-	static #add(storage: Box) {
-		Box.#list.push(storage);
+	static #add(box: Box) {
+		Box.#list.push(box);
 	}
 
 	#name: string;
@@ -138,7 +138,7 @@ export class Box {
 		cards = cards.filter((card) => card.location === undefined);
 
 		for (const card of cards) {
-			const index = this.#content.findIndex((storageCard) => storageCard.id === card.id);
+			const index = this.#content.findIndex((boxCard) => boxCard.id === card.id);
 
 			if (index > -1) {
 				this.#content.splice(index, 1);
@@ -149,21 +149,21 @@ export class Box {
 	}
 
 	/**
-	 * Draws Cards from a given Box. If the storage doesn't have enough Cards, a RangeError will be thrown and none of the Cards will move.
-	 * @param {Box} storage - The Box from which draw Cards.
+	 * Draws Cards from a given Box. If the Box doesn't have enough Cards, a RangeError will be thrown and none of the Cards will move.
+	 * @param {Box} box - The Box from which draw Cards.
 	 * @param {number} number - The number of cards to draw (default: 1)
 	 * @returns The updated Box
 	 * @public
 	 */
-	drawFrom(storage: Box, number: number = 1): Box {
-		if (storage.length < number) {
+	drawFrom(box: Box, number: number = 1): Box {
+		if (box.length < number) {
 			throw new RangeError(
-				`Not enough Cards to be drawn. Box's length: ${storage.length}. Number wanted: ${number}`,
+				`Not enough Cards to be drawn. Box's length: ${box.length}. Number wanted: ${number}`,
 			);
 		}
 
 		for (let i = 0; i < number; i++) {
-			storage.top.moveTo(this);
+			box.top.moveTo(this);
 		}
 
 		return this;
