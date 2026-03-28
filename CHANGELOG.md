@@ -2,6 +2,8 @@
 
 ## 2.0.0
 
+- Changed main entry point to expose a singleton
+- Added support for blackjack
 - Renamed CardStorage to Box
 - Renamed Decklist to List
 - Reworked file architecture and exports for smoother paths
