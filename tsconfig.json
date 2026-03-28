@@ -15,8 +15,12 @@
 
 		"paths": {
 			"/common": ["src/common/index"],
+            "/common/*": ["src/common/*"],
 			"/blackjack": ["src/blackjack/index"],
-			"/decklists": ["src/decklists/index"]
+            "/blackjack/*": ["src/blackjack/*"],
+			"/decklists": ["src/decklists/index"],
+            "/decklists/*": ["src/decklists/*"],
+            "/Cardian": ["src/Cardian"]
 		}
 	},
 	"files": ["src/Cardian.ts"]

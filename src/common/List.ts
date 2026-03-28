@@ -1,4 +1,5 @@
-import { Box, Card, type PseudoCard } from "/common";
+import Cardian from "/Cardian";
+import type { Box, Card, PseudoCard } from "/common";
 
 /**
  * A List is a complete collection of Cards.
@@ -37,7 +38,7 @@ export class List extends Array<Card> {
 			}
 
 			for (let i = 0; i < pseudoCard.copies; i++) {
-				const card = new Card(this, pseudoCard);
+				const card = new Cardian.Card(this, pseudoCard);
 
 				this.push(card);
 			}
@@ -69,7 +70,7 @@ export class List extends Array<Card> {
 		const wronglyLocatedCards = this.filter((card) => card.location === undefined);
 
 		for (const card of wronglyLocatedCards) {
-			console.log(`${card.name} had undefined location; moved it to its List's default storage.`);
+			console.warn(`${card.name} had undefined location; moved it to its List's default storage.`);
 			//card.moveTo(this.#mainBox);
 			card.return();
 		}
@@ -80,7 +81,7 @@ export class List extends Array<Card> {
 	constructor(pseudoCards: Array<PseudoCard>) {
 		super();
 
-		this.#mainBox = new Box("DEFAULT");
+		this.#mainBox = new Cardian.Box("DEFAULT");
 
 		this.add(...pseudoCards);
 	}

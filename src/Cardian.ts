@@ -45,7 +45,6 @@ class Cardian {
 		Cardian.singleton = true;
 
 		this.#components = common;
-		console.log(this.#components);
 
 		this.#standard52 = decklists.standard52;
 		this.#standard52_sextet = decklists.standard52_sextet;

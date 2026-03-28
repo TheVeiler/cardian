@@ -39,8 +39,12 @@ const config = {
 		extensions: [".ts", ".js", "..."],
 		alias: {
 			"/common": path.resolve(__dirname, "src/common/index"),
+			"/common/*": path.resolve(__dirname, "src/common/*"),
 			"/blackjack": path.resolve(__dirname, "src/blackjack/index"),
+			"/blackjack/*": path.resolve(__dirname, "src/blackjack/*"),
 			"/decklists": path.resolve(__dirname, "src/decklists/index"),
+			"/decklists/*": path.resolve(__dirname, "src/decklists/*"),
+			"/Cardian": path.resolve(__dirname, "src/Cardian"),
 		},
 	},
 
