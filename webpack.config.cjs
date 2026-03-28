@@ -49,9 +49,10 @@ const config = {
 	},
 
 	output: {
+		clean: true,
 		libraryTarget: "module", // and also this — which requires the previous block
 		path: path.resolve(__dirname, "dist"),
-		filename: "index.js",
+		filename: "Cardian.js",
 	},
 };
 
