@@ -16,6 +16,8 @@ type List = typeof common.List | typeof blackjack.List; // | typeof holdem.Card;
 type Mode = "none" | "blackjack"; // | "holdem";
 
 class Cardian {
+	static singleton = false;
+
 	#components: IComponents;
 	get Card() {
 		return this.#components.Card;
@@ -37,6 +39,11 @@ class Cardian {
 	}
 
 	constructor() {
+		if (Cardian.singleton) {
+			throw new Error("Cardian class must be used as a singleton and is already instantiated.");
+		}
+		Cardian.singleton = true;
+
 		this.#components = common;
 		console.log(this.#components);
 
@@ -61,6 +68,4 @@ class Cardian {
 	}
 }
 
-const cardian = new Cardian();
-
-export default cardian;
+export default new Cardian();
