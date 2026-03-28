@@ -68,7 +68,7 @@ export class Box {
 	 * @type {number}
 	 * @readonly
 	 */
-	get length() {
+	get size() {
 		return this.content.length;
 	}
 
@@ -88,12 +88,6 @@ export class Box {
 	 */
 	get bottom() {
 		return this.content.at(-1);
-	}
-
-	constructor(name: string) {
-		this.#name = name;
-
-		Box.#add(this);
 	}
 
 	/**
@@ -121,7 +115,7 @@ export class Box {
 			position = positionOrfirstCard;
 		}
 
-		const index = position === "top" ? 0 : this.#content.length;
+		const index = position === "top" ? 0 : this.size;
 
 		this.#content.splice(index, 0, ...cards);
 
@@ -138,7 +132,7 @@ export class Box {
 		cards = cards.filter((card) => card.location === undefined);
 
 		for (const card of cards) {
-			const index = this.#content.findIndex((boxCard) => boxCard.id === card.id);
+			const index = this.content.findIndex((boxCard) => boxCard.id === card.id);
 
 			if (index > -1) {
 				this.#content.splice(index, 1);
@@ -156,9 +150,9 @@ export class Box {
 	 * @public
 	 */
 	drawFrom(box: Box, number: number = 1): Box {
-		if (box.length < number) {
+		if (box.size < number) {
 			throw new RangeError(
-				`Not enough Cards to be drawn. Box's length: ${box.length}. Number wanted: ${number}`,
+				`Not enough Cards to be drawn. Box's size: ${box.size}. Number wanted: ${number}`,
 			);
 		}
 
@@ -188,8 +182,7 @@ export class Box {
 	 * @public
 	 */
 	shuffle(): Box {
-		const initialContent = [...this.content];
-		this.#content = [];
+		const initialContent = this.#content.splice(0);
 
 		while (initialContent.length > 0) {
 			const randomIndex = Math.floor(Math.random() * initialContent.length);
@@ -198,5 +191,15 @@ export class Box {
 		}
 
 		return this;
+	}
+
+	constructor(name: string) {
+		this.#name = name;
+
+		Box.#add(this);
+	}
+
+	get [Symbol.toStringTag]() {
+		return this.name;
 	}
 }

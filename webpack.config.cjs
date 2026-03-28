@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 /** @type {import("webpack").Configuration} */
 const config = {
-	entry: "./src/index.ts",
+	entry: "./src/Cardian.ts",
 
 	target: "web",
 

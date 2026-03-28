@@ -124,20 +124,6 @@ export class Card {
 		this.#onMoveEnd = undefined;
 	}
 
-	constructor(List: List, pseudoCard: PseudoCard) {
-		this.#name = pseudoCard.name || "";
-
-		this.#List = List;
-		List.mainBox.addCards(this);
-		this.#location = List.mainBox;
-
-		this.#images.front = pseudoCard.assets?.front;
-		this.#images.back = pseudoCard.assets?.back;
-
-		this.#id = Card.#lastUsedId++;
-		Card.#add(this);
-	}
-
 	/**
 	 * Moves a Card to the given Box.
 	 * @param {Box} destination - The Box the Card moves to
@@ -184,10 +170,21 @@ export class Card {
 		return this;
 	}
 
-	/**
-	 * Returns a string representation of an object.
-	 */
-	toString(): string {
+	constructor(List: List, pseudoCard: PseudoCard) {
+		this.#name = pseudoCard.name || "";
+
+		this.#List = List;
+		List.mainBox.addCards(this);
+		this.#location = List.mainBox;
+
+		this.#images.front = pseudoCard.assets?.front;
+		this.#images.back = pseudoCard.assets?.back;
+
+		this.#id = Card.#lastUsedId++;
+		Card.#add(this);
+	}
+
+    get [Symbol.toStringTag]() {
 		return this.name;
 	}
 }

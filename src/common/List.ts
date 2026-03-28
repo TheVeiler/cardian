@@ -24,14 +24,6 @@ export class List extends Array<Card> {
 		this.#mainBox = storage;
 	}
 
-	constructor(pseudoCards: Array<PseudoCard>) {
-		super();
-
-		this.#mainBox = new Box("DEFAULT");
-
-		this.add(...pseudoCards);
-	}
-
 	/**
 	 * Adds Cards to a List using blueprints.
 	 * @param {Array<PseudoCard>} pseudoCards - All the Cards' blueprints to populate the List with
@@ -83,5 +75,13 @@ export class List extends Array<Card> {
 		}
 
 		return this;
+	}
+
+	constructor(pseudoCards: Array<PseudoCard>) {
+		super();
+
+		this.#mainBox = new Box("DEFAULT");
+
+		this.add(...pseudoCards);
 	}
 }
