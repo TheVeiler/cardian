@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 /** @type {import("webpack").Configuration} */
 const config = {
-	entry: "./src/index.ts",
+	entry: "./src/Cardian.ts",
 
 	target: "web",
 
@@ -37,6 +37,15 @@ const config = {
 
 	resolve: {
 		extensions: [".ts", ".js", "..."],
+		alias: {
+			"/common": path.resolve(__dirname, "src/common/index"),
+			"/common/*": path.resolve(__dirname, "src/common/*"),
+			"/blackjack": path.resolve(__dirname, "src/blackjack/index"),
+			"/blackjack/*": path.resolve(__dirname, "src/blackjack/*"),
+			"/decklists": path.resolve(__dirname, "src/decklists/index"),
+			"/decklists/*": path.resolve(__dirname, "src/decklists/*"),
+			"/Cardian": path.resolve(__dirname, "src/Cardian"),
+		},
 	},
 
 	performance: {
@@ -44,9 +53,10 @@ const config = {
 	},
 
 	output: {
+		clean: true,
 		libraryTarget: "module", // and also this — which requires the previous block
 		path: path.resolve(__dirname, "dist"),
-		filename: "index.js",
+		filename: "Cardian.js",
 	},
 };
 

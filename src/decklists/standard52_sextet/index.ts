@@ -1,4 +1,4 @@
-import type { PseudoCard } from "../../../lib/index";
+import type { PseudoCard } from "/common";
 
 const assetsDirectory = `file://${__dirname}/assets/standard52/`;
 
@@ -27,7 +27,7 @@ const suitInitials = {
 };
 
 /**
- * A standard 52-card deck of French-suited playing cards (Ace to King, for each of the four suits: clubs, diamonds, hearts and spades).
+ * Six standard 52-card decks of French-suited playing cards (Ace to King, for each of the four suits: clubs, diamonds, hearts and spades).
  */
 const pseudoCards: Array<PseudoCard> = [];
 
@@ -40,6 +40,7 @@ for (const suit of suits) {
 				front: new URL(`${filename}.svg`, assetsDirectory),
 				back: new URL("back_blue.svg", assetsDirectory),
 			},
+			copies: 6,
 		};
 
 		pseudoCards.push(pseudoCard);

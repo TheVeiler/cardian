@@ -11,7 +11,17 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"outDir": "dist",
-		"types": ["node", "webpack/module"]
+		"types": ["node", "webpack/module"],
+
+		"paths": {
+			"/common": ["src/common/index"],
+            "/common/*": ["src/common/*"],
+			"/blackjack": ["src/blackjack/index"],
+            "/blackjack/*": ["src/blackjack/*"],
+			"/decklists": ["src/decklists/index"],
+            "/decklists/*": ["src/decklists/*"],
+            "/Cardian": ["src/Cardian"]
+		}
 	},
-	"files": ["src/index.ts"]
+	"files": ["src/Cardian.ts"]
 }

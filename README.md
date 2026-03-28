@@ -66,12 +66,6 @@ deck.shuffle();
 console.log(deck.top.name); // should display a random card
 ```
 
-## To-do
-
-- Make a proper documentation (using jsdoc or tsdoc maybe?)
-- Add listener for events when CardStorage changed
-- Add unit tests
-
 ## Credits
 
 Images used for Cardian are made by David Bellot, and only slightly edited afterhand by TheVeiler. All credit must go to the original artist alone. [See more](./public/assets/standard52/README.md)

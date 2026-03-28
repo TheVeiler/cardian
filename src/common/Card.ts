@@ -1,4 +1,4 @@
-import { Decklist, CardStorage } from ".";
+import { List, Box } from "/common";
 
 type Position = "top" | "bottom";
 
@@ -14,7 +14,7 @@ export interface PseudoCard {
 /**
  * The core element of this library. It represents a real world card.
  * @constructor
- * @param {Decklist} decklist - The Decklist the Card is part of
+ * @param {List} List - The List the Card is part of
  * @param {PseudoCard} pseudoCard - The blueprint of the Card
  */
 export class Card {
@@ -67,16 +67,16 @@ export class Card {
 	}
 
 	/**
-	 * The Decklist a Card comes from.
-	 * @type {Decklist}
+	 * The List a Card comes from.
+	 * @type {List}
 	 * @private
 	 */
-	#decklist: Decklist;
+	#List: List;
 
-	#location: CardStorage;
+	#location: Box;
 	/**
 	 * The current location of a Card.
-	 * @type {CardStorage}
+	 * @type {Box}
 	 * @readonly
 	 */
 	get location() {
@@ -96,7 +96,7 @@ export class Card {
 		return this.#images;
 	}
 
-	#onMoveStart?: (origin?: CardStorage, destination?: CardStorage) => void = undefined;
+	#onMoveStart?: (origin?: Box, destination?: Box) => void = undefined;
 	get onMoveStart() {
 		return this.#onMoveStart;
 	}
@@ -111,7 +111,7 @@ export class Card {
 			`Card.onMoveStart must be a function or undefined. Received: ${typeof callback}`,
 		);
 	}
-	#onMoveEnd?: (origin?: CardStorage, destination?: CardStorage) => void = undefined;
+	#onMoveEnd?: (origin?: Box, destination?: Box) => void = undefined;
 	get onMoveEnd() {
 		return this.#onMoveEnd;
 	}
@@ -124,27 +124,13 @@ export class Card {
 		this.#onMoveEnd = undefined;
 	}
 
-	constructor(decklist: Decklist, pseudoCard: PseudoCard) {
-		this.#name = pseudoCard.name || "";
-
-		this.#decklist = decklist;
-		decklist.defaultStorage.addCards(this);
-		this.#location = decklist.defaultStorage;
-
-		this.#images.front = pseudoCard.assets?.front;
-		this.#images.back = pseudoCard.assets?.back;
-
-		this.#id = Card.#lastUsedId++;
-		Card.#add(this);
-	}
-
 	/**
-	 * Moves a Card to the given CardStorage.
-	 * @param {CardStorage} destination - The CardStorage the Card moves to
+	 * Moves a Card to the given Box.
+	 * @param {Box} destination - The Box the Card moves to
 	 * @returns The updated Card
 	 * @public
 	 */
-	moveTo(destination: CardStorage, position: Position = "bottom"): Card {
+	moveTo(destination: Box, position: Position = "bottom"): Card {
 		const origin = this.location;
 
 		if (typeof this.onMoveStart === "function") {
@@ -165,7 +151,7 @@ export class Card {
 	}
 
 	/**
-	 * Returns a Card to its default CardStorage.
+	 * Returns a Card to its default Box.
 	 * @returns The updated Card
 	 * @public
 	 */
@@ -176,7 +162,7 @@ export class Card {
 		this.onMoveStart = undefined;
 		this.onMoveEnd = undefined;
 
-		this.moveTo(this.#decklist.defaultStorage);
+		this.moveTo(this.#List.mainBox);
 
 		this.onMoveStart = _onMoveStart;
 		this.onMoveEnd = _onMoveEnd;
@@ -184,10 +170,21 @@ export class Card {
 		return this;
 	}
 
-	/**
-	 * Returns a string representation of an object.
-	 */
-	toString(): string {
+	constructor(List: List, pseudoCard: PseudoCard) {
+		this.#name = pseudoCard.name || "";
+
+		this.#List = List;
+		List.mainBox.addCards(this);
+		this.#location = List.mainBox;
+
+		this.#images.front = pseudoCard.assets?.front;
+		this.#images.back = pseudoCard.assets?.back;
+
+		this.#id = Card.#lastUsedId++;
+		Card.#add(this);
+	}
+
+	get [Symbol.toStringTag]() {
 		return this.name;
 	}
 }

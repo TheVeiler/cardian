@@ -1,6 +1,6 @@
 {
 	"name": "cardian",
-	"version": "1.4.1",
+	"version": "2.0.0",
 	"description": "Cardian is a utility library whose purpose is to make creating apps using cards easier.",
 	"author": "TheVeiler",
 	"license": "ISC",
@@ -14,8 +14,8 @@
 		"url": "git+https://github.com/TheVeiler/Cardian.git"
 	},
 	"type": "module",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "dist/Cardian.js",
+	"types": "dist/Cardian.d.ts",
 	"files": [
 		"dist"
 	],
