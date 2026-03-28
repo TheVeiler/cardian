@@ -37,6 +37,11 @@ const config = {
 
 	resolve: {
 		extensions: [".ts", ".js", "..."],
+		alias: {
+			"/common": path.resolve(__dirname, "src/common/index"),
+			"/blackjack": path.resolve(__dirname, "src/blackjack/index"),
+			"/decklists": path.resolve(__dirname, "src/decklists/index"),
+		},
 	},
 
 	performance: {

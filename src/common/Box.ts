@@ -1,4 +1,4 @@
-import { Card } from "./index";
+import { Card } from "/common";
 
 type Position = "top" | "bottom";
 

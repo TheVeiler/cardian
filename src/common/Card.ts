@@ -1,4 +1,4 @@
-import { List, Box } from "./index";
+import { List, Box } from "/common";
 
 type Position = "top" | "bottom";
 
@@ -184,7 +184,7 @@ export class Card {
 		Card.#add(this);
 	}
 
-    get [Symbol.toStringTag]() {
+	get [Symbol.toStringTag]() {
 		return this.name;
 	}
 }

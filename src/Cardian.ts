@@ -1,8 +1,8 @@
-import * as common from "./common/index";
-import * as blackjack from "./blackjack/index";
-// import * as holdem from "./holdem/index";
+import * as common from "/common";
+import * as blackjack from "/blackjack";
+// import * as holdem from "/holdem";
 
-import * as decklists from "./decklists/index";
+import * as decklists from "/decklists";
 
 interface IComponents {
 	Card: Card;

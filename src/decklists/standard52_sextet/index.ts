@@ -1,4 +1,4 @@
-import type { PseudoCard } from "../../common/index";
+import type { PseudoCard } from "/common";
 
 const assetsDirectory = `file://${__dirname}/assets/standard52/`;
 
