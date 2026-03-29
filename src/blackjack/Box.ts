@@ -13,6 +13,10 @@ class BJBox extends Box {
 		return rawTotal;
 	}
 
+	get isBlackjack() {
+		return this.total === 21 && this.size === 2;
+	}
+
 	constructor(name: string) {
 		super(name);
 	}
