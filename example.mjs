@@ -1,4 +1,4 @@
-import * as Cardian from "cardian";
+import Cardian from "cardian";
 
 const cardlist = new Cardian.List(Cardian.standard52);
 const deck = cardlist.mainBox;
@@ -13,5 +13,5 @@ const hand = new Cardian.Box("hand");
 
 hand.drawFrom(deck, 2);
 
-console.log(deck.size) // should display 50
-console.log(hand.size) // should display 2
+console.log(deck.size); // should display 50
+console.log(hand.size); // should display 2

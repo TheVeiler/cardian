@@ -1,32 +1,30 @@
 <!doctype html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script type="module">
+			// import Cardian from "https://theveiler.github.io/Cardian/index.js";
+			import Cardian from "./dist/index.js"; // wrong
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <script type="module">
-            // import Cardian from "https://theveiler.github.io/Cardian/index.js";
-            import Cardian from "./dist/index.js"; // wrong
+			const cardlist = new Cardian.List(Cardian.standard52);
+			const deck = cardlist.mainBox;
 
-            const cardlist = new Cardian.List(Cardian.standard52);
-            const deck = cardlist.mainBox;
+			console.log(deck.top.name); // should display A♦
 
-            console.log(deck.top.name); // should display A♦
+			deck.shuffle();
 
-            deck.shuffle();
+			console.log(deck.top.name); // should display a random card
 
-            console.log(deck.top.name); // should display a random card
+			const hand = new Cardian.Box("hand");
 
-            const hand = new Cardian.Box("hand");
+			hand.drawFrom(deck, 2);
 
-            hand.drawFrom(deck, 2);
+			console.log(deck.size); // should display 50
+			console.log(hand.size); // should display 2
+		</script>
+	</head>
 
-            console.log(deck.size) // should display 50
-            console.log(hand.size) // should display 2
-        </script>
-    </head>
-
-    <body></body>
-
+	<body></body>
 </html>
