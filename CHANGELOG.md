@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+- blackjack: Fixed score calculation for 3+ aces
+
 ## 2.0.0
 
 - Changed main entry point to expose a singleton
