@@ -29,7 +29,7 @@ const Cardian = require("cardian");
 #### ECMAScript
 
 ```js
-import * as Cardian from "cardian";
+import Cardian from "cardian";
 ```
 
 ## Credits
